@@ -25,10 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dotnet
-        working-directory: .
         uses: actions/setup-dotnet@v1.8.2
         with:
-        dotnet-version: "6.x.x"
+          dotnet-version: "6.x.x"
       - name: Checkout
         uses: actions/checkout@v3
         with:
