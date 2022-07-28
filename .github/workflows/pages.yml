@@ -46,7 +46,6 @@ jobs:
         with:
           path: watin/out
 
-# Deployment job
   deploy:
     environment:
       name: github-pages
