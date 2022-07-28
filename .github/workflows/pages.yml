@@ -35,7 +35,10 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v1
-      - name: Build with dotnet
+      - name: Install dependencies
+        working-directory: watin/
+        run: dotnet restore
+      - name: Build
         working-directory: watin/
         run: dotnet build --configuration Release --no-restore
       - name: Publish with dotnet
