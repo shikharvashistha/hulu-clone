@@ -47,15 +47,7 @@ jobs:
       - name: Upload csproj
         uses: actions/upload-pages-artifact@v1
         with:
-          path: watin/watin.csproj
-      - name: Upload dll
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: watin/bin/Debug/net6.0/watin.dll
-      - name: Upload publish
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: watin/bin/Debug/net6.0/publish
+          path: watin/
   deploy:
     environment:
       name: github-pages
