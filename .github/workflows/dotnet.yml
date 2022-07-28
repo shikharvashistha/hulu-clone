@@ -27,11 +27,11 @@ jobs:
     - name: Install dependencies
       working-directory: watin/
       run: dotnet restore
-      
+
     - name: Build
       working-directory: watin/
       run: dotnet build --configuration Release --no-restore
-    
+
     - name: Test
       working-directory: unit-testing-using-watin-nunit/
       run: dotnet test --no-restore --verbosity normal

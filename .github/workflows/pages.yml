@@ -43,12 +43,11 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Publish with dotnet
         working-directory: watin/
-        run: dotnet publish -o /out
-      - name: Upload artifact
+        run: dotnet publish
+      - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: watin/out
-
+          path: watin/
   deploy:
     environment:
       name: github-pages
