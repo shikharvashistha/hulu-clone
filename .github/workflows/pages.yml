@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [$default-branch]
+
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          global-json-file: watin/global.json
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v1
+      - name: Build with dotnet
+        working-directory: watin/
+        run: dotnet build --configuration Release --no-restore
+      - name: Publish with dotnet
+        working-directory: watin/
+        run: dotnet publish -o /out
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: watin/out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
